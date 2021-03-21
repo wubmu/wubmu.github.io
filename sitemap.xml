@@ -2,8 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/posts/first_post/</loc><lastmod>2021-03-18T11:29:42&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/</loc><lastmod>2021-03-18T11:29:42&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2021-03-18T11:29:42&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/categories/</loc></url><url>
-            <loc>http://example.org/tags/</loc></url></urlset>
+            <loc>https://wubmu.github.io/demo/</loc><lastmod>2021-03-21T20:32:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://wubmu.github.io/posts/</loc><lastmod>2021-03-21T20:32:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://wubmu.github.io/</loc><lastmod>2021-03-21T20:32:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://wubmu.github.io/%E8%83%BD%E5%87%BA%E6%9D%A5%E4%B8%8D/</loc><lastmod>2021-03-18T11:38:17&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://wubmu.github.io/idea%E6%9E%84%E5%BB%BAmavenssm/</loc><lastmod>2018-12-27T22:34:14&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://wubmu.github.io/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://wubmu.github.io/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
