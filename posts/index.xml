@@ -4,21 +4,7 @@
         <link>https://wubmu.github.io/posts/</link>
         <description>所有文章 | 我的全新 Hugo 网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>wyb2020@nwafu.edu.cn (wubmu)</managingEditor>
-            <webMaster>wyb2020@nwafu.edu.cn (wubmu)</webMaster><lastBuildDate>Sun, 21 Mar 2021 20:32:48 &#43;0800</lastBuildDate><atom:link href="https://wubmu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Demo</title>
-    <link>https://wubmu.github.io/demo/</link>
-    <pubDate>Sun, 21 Mar 2021 20:32:48 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wubmu.github.io/demo/</guid>
-    <description><![CDATA[测试下github]]></description>
-</item><item>
-    <title>能出来不</title>
-    <link>https://wubmu.github.io/%E8%83%BD%E5%87%BA%E6%9D%A5%E4%B8%8D/</link>
-    <pubDate>Thu, 18 Mar 2021 11:38:17 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://wubmu.github.io/%E8%83%BD%E5%87%BA%E6%9D%A5%E4%B8%8D/</guid>
-    <description><![CDATA[你快出来啊]]></description>
-</item><item>
+            <webMaster>wyb2020@nwafu.edu.cn (wubmu)</webMaster><lastBuildDate>Thu, 27 Dec 2018 22:34:14 &#43;0000</lastBuildDate><atom:link href="https://wubmu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>IDEA构建Maven＋SSM</title>
     <link>https://wubmu.github.io/idea%E6%9E%84%E5%BB%BAmavenssm/</link>
     <pubDate>Thu, 27 Dec 2018 22:34:14 &#43;0000</pubDate>

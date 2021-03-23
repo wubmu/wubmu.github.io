@@ -1,5 +1,8 @@
-# IDEA构建Maven＋SSM
-
+---
+title: IDEA构建Maven＋SSM
+date: 2018-12-27 22:34:14
+tags: 
+---
 
 ### 创建IDEA项目
 
@@ -557,4 +560,3 @@ create table user
 ![](../IDEA构建Maven＋SSM/20.png)
 
 ### [Github项目地址](https://github.com/wubmu/SSM/)
-
