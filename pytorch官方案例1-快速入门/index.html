@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Pytorch官方案例(1) 快速入门 - 我的全新 Hugo 网站</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="Pytorch官方案例(1) 快速入门" />
+<meta property="og:description" content="[toc] 快速入门 这个一小节, 包含了机器学习中的基本流程 数据准备 创建模型 定义优化器 保存模型参数 加载模型 1. 数据准备 pytorch有两个处理数据的工具:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" /><meta property="og:image" content="https://wubmu.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-25T22:08:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-25T22:08:51&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://wubmu.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Pytorch官方案例(1) 快速入门"/>
+<meta name="twitter:description" content="[toc] 快速入门 这个一小节, 包含了机器学习中的基本流程 数据准备 创建模型 定义优化器 保存模型参数 加载模型 1. 数据准备 pytorch有两个处理数据的工具:"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" /><link rel="prev" href="https://wubmu.github.io/idea%E6%9E%84%E5%BB%BAmavenssm/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Pytorch官方案例(1) 快速入门",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/wubmu.github.io\/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8\/"
+        },"genre": "posts","wordcount":  1576 ,
+        "url": "https:\/\/wubmu.github.io\/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8\/","datePublished": "2021-04-25T22:08:51+08:00","dateModified": "2021-04-25T22:08:51+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "wubmu"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Pytorch官方案例(1) 快速入门</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>wubmu</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-25">2021-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1576 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#快速入门">快速入门</a>
+      <ul>
+        <li><a href="#1-数据准备">1. 数据准备</a></li>
+        <li><a href="#2-模型创建">2. 模型创建</a></li>
+        <li><a href="#3-定义优化器和损失函数">3. 定义优化器和损失函数</a></li>
+        <li><a href="#4-模型存储">4. 模型存储</a></li>
+        <li><a href="#5-加载模型">5. 加载模型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>[toc]</p>
+<h2 id="快速入门">快速入门</h2>
+<p>这个一小节, 包含了机器学习中的基本流程</p>
+<ul>
+<li>数据准备</li>
+<li>创建模型</li>
+<li>定义优化器</li>
+<li>保存模型参数</li>
+<li>加载模型</li>
+</ul>
+<h3 id="1-数据准备">1. 数据准备</h3>
+<p>pytorch有两个处理数据的工具:torch.utils.data. DataLoader和torch.utils.data. Dataset
+Dataset存储样本及其相应的标签，而DataLoader在数据集上包装一个可迭代对象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">torchvision.transforms</span> <span class="kn">import</span> <span class="n">ToTensor</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">Compose</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#从公开数据集下载训练数据</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">FashionMNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&#34;../data&#34;</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">download</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="c1">#如果需要下载改为True</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">ToTensor</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="c1">#从公开数据集下载测试数据</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">FashionMNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&#34;../data&#34;</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">download</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">ToTensor</span><span class="p">(),</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们把Dataset当作一个参数传给DataLoader. 这个迭代器, 支持自动批处理, 采样
+随机打乱数据, 多进程加载数据.
+这里我们定义batch大小为64, Dataloader迭代器每次将会返回一个batch, 包含feature和labels</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="c1">#创建dataloaders</span>
+<span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">test_dataloader</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;X的维度[N,C,H,W]:&#34;</span><span class="p">,</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>     <span class="c1">#[N,C,H,W] [在索引中的编号,通道,高,宽]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;y的维度: &#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">break</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/wubmu/image/raw/master/img/20210425214805.png"
+        data-srcset="https://gitee.com/wubmu/image/raw/master/img/20210425214805.png, https://gitee.com/wubmu/image/raw/master/img/20210425214805.png 1.5x, https://gitee.com/wubmu/image/raw/master/img/20210425214805.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/wubmu/image/raw/master/img/20210425214805.png"
+        title="https://gitee.com/wubmu/image/raw/master/img/20210425214805.png" /></p>
+<h3 id="2-模型创建">2. 模型创建</h3>
+<p>pytorch定义神经网络, 需要创建一个类继承nn. Module.
+<code>__init__</code> : 定义网络层数
+<code>forword</code> : 定义数据在网络中的流向</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 如果有GPU采用gpu加速训练</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&#34;cuda&#34;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&#34;cpu&#34;</span>
+
+<span class="c1"># 定义模型</span>
+<span class="k">class</span> <span class="nc">DNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()</span>     <span class="c1">#原始数据是[1,28,28],把它拉直  变成[28*28]一维</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>         <span class="c1">#有10个类别</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">DNN</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/wubmu/image/raw/master/img/20210425214943.png"
+        data-srcset="https://gitee.com/wubmu/image/raw/master/img/20210425214943.png, https://gitee.com/wubmu/image/raw/master/img/20210425214943.png 1.5x, https://gitee.com/wubmu/image/raw/master/img/20210425214943.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/wubmu/image/raw/master/img/20210425214943.png"
+        title="https://gitee.com/wubmu/image/raw/master/img/20210425214943.png" /></p>
+<h3 id="3-定义优化器和损失函数">3. 定义优化器和损失函数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在训练过程中，在单次循环中, 模型需要对训练数据做预测, 并且反向传播更新模型参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># 前向传播和计算误差</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1">#交叉熵会自动对y进行one-hot</span>
+
+        <span class="c1">#反向传播</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>   <span class="c1">#梯度清零</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>         <span class="c1">#方向传播</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>        <span class="c1">#更新模型</span>
+
+        <span class="k">if</span> <span class="n">batch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>   <span class="c1">#每100个batch打印一下误差</span>
+            <span class="n">loss</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">batch</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;loss: {loss:&gt;7f}    [{current:&gt;5d}/{size:&gt;5d}]&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们还将对照测试数据集检查模型的性能，以确保模型是可学习的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="c1"># size = len(dataloader.dataset)</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">test_loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>   <span class="c1">#测试集不用更新参数,不记录梯度</span>
+        <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+            <span class="n">X</span> <span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">+=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="c1">#pred.argmax(1) 找到概率最大的索引位置, 即预测的label</span>
+            <span class="c1">#(pred.argmax(1) == y) 是否与 y的label相等</span>
+            <span class="c1">#(pred.argmax(1) == y).type(torch.float).sum():统计true的个数 ,true转换成float为1</span>
+
+    <span class="n">test_loss</span> <span class="o">/=</span> <span class="n">size</span>
+    <span class="n">correct</span> <span class="o">/=</span> <span class="n">size</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Test Error: </span><span class="se">\n</span><span class="s2"> Accuracy: {(100*correct):&gt;0.1f}%, Avg loss: {test_loss:&gt;8f} </span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>训练的过程需要迭代多次(epoch)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">epochs</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Epoch {t+1}</span><span class="se">\n</span><span class="s2">------------------------------&#34;</span><span class="p">)</span>
+    <span class="n">train</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Done!&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">out</span><span class="p">:</span>
+<span class="n">Epoch</span> <span class="mi">1</span>
+<span class="o">------------------------------</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">2.298897</span>    <span class="p">[</span>    <span class="mi">0</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.661566</span>    <span class="p">[</span> <span class="mi">6400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.727862</span>    <span class="p">[</span><span class="mi">12800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.804164</span>    <span class="p">[</span><span class="mi">19200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.650022</span>    <span class="p">[</span><span class="mi">25600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.702805</span>    <span class="p">[</span><span class="mi">32000</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.369759</span>    <span class="p">[</span><span class="mi">38400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.585616</span>    <span class="p">[</span><span class="mi">44800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.414686</span>    <span class="p">[</span><span class="mi">51200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.726880</span>    <span class="p">[</span><span class="mi">57600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">Test</span> <span class="n">Error</span><span class="p">:</span> 
+ <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">35.1</span><span class="o">%</span><span class="p">,</span> <span class="n">Avg</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.026484</span> 
+
+<span class="n">Epoch</span> <span class="mi">2</span>
+<span class="o">------------------------------</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.485116</span>    <span class="p">[</span>    <span class="mi">0</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.520031</span>    <span class="p">[</span> <span class="mi">6400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.653199</span>    <span class="p">[</span><span class="mi">12800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.769573</span>    <span class="p">[</span><span class="mi">19200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.478098</span>    <span class="p">[</span><span class="mi">25600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.689139</span>    <span class="p">[</span><span class="mi">32000</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.349994</span>    <span class="p">[</span><span class="mi">38400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.552191</span>    <span class="p">[</span><span class="mi">44800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.387923</span>    <span class="p">[</span><span class="mi">51200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.632932</span>    <span class="p">[</span><span class="mi">57600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">Test</span> <span class="n">Error</span><span class="p">:</span> 
+ <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">36.9</span><span class="o">%</span><span class="p">,</span> <span class="n">Avg</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.025579</span> 
+
+<span class="n">Epoch</span> <span class="mi">3</span>
+<span class="o">------------------------------</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.375883</span>    <span class="p">[</span>    <span class="mi">0</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.485450</span>    <span class="p">[</span> <span class="mi">6400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.643194</span>    <span class="p">[</span><span class="mi">12800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.745134</span>    <span class="p">[</span><span class="mi">19200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.489459</span>    <span class="p">[</span><span class="mi">25600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.683173</span>    <span class="p">[</span><span class="mi">32000</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.332691</span>    <span class="p">[</span><span class="mi">38400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.527047</span>    <span class="p">[</span><span class="mi">44800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.088369</span>    <span class="p">[</span><span class="mi">51200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.412117</span>    <span class="p">[</span><span class="mi">57600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">Test</span> <span class="n">Error</span><span class="p">:</span> 
+ <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">56.1</span><span class="o">%</span><span class="p">,</span> <span class="n">Avg</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.019232</span> 
+
+<span class="n">Epoch</span> <span class="mi">4</span>
+<span class="o">------------------------------</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">0.949627</span>    <span class="p">[</span>    <span class="mi">0</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.063320</span>    <span class="p">[</span> <span class="mi">6400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.107010</span>    <span class="p">[</span><span class="mi">12800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.242038</span>    <span class="p">[</span><span class="mi">19200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.226886</span>    <span class="p">[</span><span class="mi">25600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.273832</span>    <span class="p">[</span><span class="mi">32000</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.029097</span>    <span class="p">[</span><span class="mi">38400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.310232</span>    <span class="p">[</span><span class="mi">44800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">0.952710</span>    <span class="p">[</span><span class="mi">51200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.395312</span>    <span class="p">[</span><span class="mi">57600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">Test</span> <span class="n">Error</span><span class="p">:</span> 
+ <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">56.5</span><span class="o">%</span><span class="p">,</span> <span class="n">Avg</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.018658</span> 
+
+<span class="n">Epoch</span> <span class="mi">5</span>
+<span class="o">------------------------------</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">0.894558</span>    <span class="p">[</span>    <span class="mi">0</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.040670</span>    <span class="p">[</span> <span class="mi">6400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.136559</span>    <span class="p">[</span><span class="mi">12800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.185049</span>    <span class="p">[</span><span class="mi">19200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.184287</span>    <span class="p">[</span><span class="mi">25600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.242846</span>    <span class="p">[</span><span class="mi">32000</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">0.998598</span>    <span class="p">[</span><span class="mi">38400</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.194539</span>    <span class="p">[</span><span class="mi">44800</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">0.940521</span>    <span class="p">[</span><span class="mi">51200</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">loss</span><span class="p">:</span> <span class="mf">1.336018</span>    <span class="p">[</span><span class="mi">57600</span><span class="o">/</span><span class="mi">60000</span><span class="p">]</span>
+<span class="n">Test</span> <span class="n">Error</span><span class="p">:</span> 
+ <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">56.6</span><span class="o">%</span><span class="p">,</span> <span class="n">Avg</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.018490</span> 
+
+<span class="n">Done</span><span class="err">!</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4-模型存储">4. 模型存储</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span><span class="s2">&#34;DNN.pth&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;把模型参数保存在DNN.pth&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="5-加载模型">5. 加载模型</h3>
+<p>加载模型的过程包括重新创建模型结构并将参数加载到其中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">model2</span> <span class="o">=</span> <span class="n">DNN</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&#34;DNN.pth&#34;</span><span class="p">))</span>
+
+<span class="c1"># 做一次预测</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&#34;T-shirt/top&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Trouser&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Pullover&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Dress&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Coat&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Sandal&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Shirt&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Sneaker&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Bag&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;Ankle boot&#34;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">model2</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">test_data</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">predicted</span><span class="p">,</span> <span class="n">actual</span> <span class="o">=</span> <span class="n">classes</span><span class="p">[</span><span class="n">pred</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="n">classes</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;预测值: &#34;{predicted}&#34;, 实际值: &#34;{actual}&#34;&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-04-25</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" data-title="Pytorch官方案例(1) 快速入门" data-via="xxxx"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" data-title="Pytorch官方案例(1) 快速入门" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" data-title="Pytorch官方案例(1) 快速入门"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" data-title="Pytorch官方案例(1) 快速入门"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" data-title="Pytorch官方案例(1) 快速入门" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" data-title="Pytorch官方案例(1) 快速入门" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" data-title="Pytorch官方案例(1) 快速入门"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/idea%E6%9E%84%E5%BB%BAmavenssm/" class="prev" rel="prev" title="IDEA构建Maven＋SSM"><i class="fas fa-angle-left fa-fw"></i>IDEA构建Maven＋SSM</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.81.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">wubmu</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

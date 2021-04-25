@@ -2,8 +2,9 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://wubmu.github.io/posts/</loc><lastmod>2021-04-25T22:08:51&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</loc><lastmod>2021-04-25T22:08:51&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://wubmu.github.io/</loc><lastmod>2021-04-25T22:08:51&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://wubmu.github.io/idea%E6%9E%84%E5%BB%BAmavenssm/</loc><lastmod>2018-12-27T22:34:14&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://wubmu.github.io/posts/</loc><lastmod>2018-12-27T22:34:14&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://wubmu.github.io/</loc><lastmod>2018-12-27T22:34:14&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://wubmu.github.io/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://wubmu.github.io/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

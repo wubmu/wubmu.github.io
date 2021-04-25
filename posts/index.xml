@@ -4,7 +4,14 @@
         <link>https://wubmu.github.io/posts/</link>
         <description>所有文章 | 我的全新 Hugo 网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>wyb2020@nwafu.edu.cn (wubmu)</managingEditor>
-            <webMaster>wyb2020@nwafu.edu.cn (wubmu)</webMaster><lastBuildDate>Thu, 27 Dec 2018 22:34:14 &#43;0000</lastBuildDate><atom:link href="https://wubmu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>wyb2020@nwafu.edu.cn (wubmu)</webMaster><lastBuildDate>Sun, 25 Apr 2021 22:08:51 &#43;0800</lastBuildDate><atom:link href="https://wubmu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Pytorch官方案例(1) 快速入门</title>
+    <link>https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+    <pubDate>Sun, 25 Apr 2021 22:08:51 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://wubmu.github.io/pytorch%E5%AE%98%E6%96%B9%E6%A1%88%E4%BE%8B1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+    <description><![CDATA[[toc] 快速入门 这个一小节, 包含了机器学习中的基本流程 数据准备 创建模型 定义优化器 保存模型参数 加载模型 1. 数据准备 pytorch有两个处理数据的工具:]]></description>
+</item><item>
     <title>IDEA构建Maven＋SSM</title>
     <link>https://wubmu.github.io/idea%E6%9E%84%E5%BB%BAmavenssm/</link>
     <pubDate>Thu, 27 Dec 2018 22:34:14 &#43;0000</pubDate>
